@@ -11,46 +11,51 @@
 		}
 
 		public function open_connection(){
-			$this->connection = mysql_connect(DB_SERVER, DB_USER, DB_PASS);
+			$this->connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS);
 			if(!$this->connection){
-				die("Database connection failed: " . mysql_error());
+				die("Database connection failed: " . mysqli_error($this->connection));
 			} else {
-				$db_select = mysql_select_db(DB_NAME, $this->connection);
+				$db_select = mysqli_select_db($this->connection, DB_NAME);
 				if(!$db_select)
-					die('Database selection failed: ' . mysql_error());
+					die('Database selection failed: ' . mysqli_error($this->connection));
 			} 
 		}
 
 		public function close_connection(){
 			if(isset($this->connection)){
-				mysql_close($this->connection);
+				mysqli_close($this->connection);
 				unset($this->connection);
 			}
 		}
 
 		public function query($sql){
-			$result = mysql_query($sql, $this->connection);
+			$result = mysqli_query($this->connection, $sql);
 			$this->confirm_query($result);
 			return $result;
 		}
 
 		private function confirm_query($result){
 			if(!$result)
-				die('Database query failed: ' . mysql_error());
+				die('Database query failed: ' . mysqli_error($this->connection));
 		}
 
 		public function mysql_prep($value){
 			$magic_quotes_active = get_magic_quotes_gpc();
-			$new_enough_php = function_exists("mysql_real_escape_string"); // PHP >= v4.3.0
+			$new_enough_php = function_exists("mysqli_real_escape_string"); // PHP >= v4.3.0
 			if($new_enough_php){
+				// echo "<br>new enough php<br>";
 				if($magic_quotes_active){
-					$value = stripslashes($value);
+					// $value = stripslashes($value);
+					// echo "magic quotes active<br>";
 				} else {
 					if(!$magic_quotes_active){
+						// echo "<br>magic quotes not active<br>";
 						$value = addslashes($value);
 					}
 				}
 			}
+			// var_dump($value);
+			// die();
 			return $value;
 		}
 	}
