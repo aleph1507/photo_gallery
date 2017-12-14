@@ -1,9 +1,6 @@
 <?php 
 
-	require_once('../../includes/functions.php');
-	require_once('../../includes/session.php');
-	require_once('../../includes/database.php');
-	require_once('../../includes/user.php');
+	require_once('../../includes/initialize.php');
 
 	if($session->is_logged_in())
 		redirect_to('index.php');
@@ -30,7 +27,7 @@
 
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Photo Gallery</title>
@@ -40,7 +37,9 @@
 	<div id="header">
 		<h1>Photo Gallery</h1>
 	</div>
-	<div id="main">
+	<div id="main"> -->
+
+		<?php include_layout_template('admin_header.php'); ?>
 		<h2>Staff Login</h2>
 		<?php echo output_message($message); ?>
 		<form action="login.php" method="POST">
@@ -65,7 +64,5 @@
 			</table>
 		</form>
 	</div>
-	<div id="footer">Copyright: <?php echo date("Y", time()); ?>, hristo</div>
-</body>
-</html>
-<?php if(isset($database)) $database->close_connection();?>
+	<?php include_layout_template('admin_footer.php'); ?>
+	<!--  -->
