@@ -35,4 +35,9 @@
 		include(SITE_ROOT.DS.'public'.DS.'layouts'.DS.$template);
 	}
 
+	function log_action($action, $message=""){
+		// 2009-01-01 13:10:03 | Login: kskoglud logged in
+		// photo_gallery/public/admin/logfile.php reads the logfile, link to clear log file, "logfile.php?clear=true", logs log clearing
+	}
+
 ?>

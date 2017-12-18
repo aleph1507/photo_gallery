@@ -23,6 +23,7 @@
 	} else { //form not submitted
 		$username = '';
 		$password = '';
+		$message = '';
 	}
 
 ?>

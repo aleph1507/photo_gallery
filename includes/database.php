@@ -4,7 +4,7 @@
 
 	class MySQLDatabase {
 
-		private $connection;
+		public $connection;
 		public $last_query;
 		private $magic_quotes_active;
 		private $real_escape_string_exists;
@@ -76,7 +76,8 @@
 
 		public function insert_id(){
 			// get last id inserted in mysql db
-			return mysqli_insert_id();
+			// global $connection;
+			return mysqli_insert_id($this->connection);
 		}
 
 		public function affected_rows(){
