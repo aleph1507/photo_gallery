@@ -70,7 +70,7 @@
  				}
 
  				// can't save without filename and temp location
- 				if(empty($this->filename) || empty($this->location)){
+ 				if(empty($this->filename) || empty($this->temp_path)){
  					$this->errors[] = 'The file location was not available.';
  					return false;
  				}
@@ -107,5 +107,34 @@
  			}
  		}
 
+ 		public function image_path() {
+ 			return $this->upload_dir.DS.$this->filename;
+ 		}
+
+ 		public function size_as_text(){
+ 			if($this->size < 1024){
+ 				return "{$this->size} bytes";
+ 			} elseif($this->size < 1048576) {
+ 				$size_kb = round($this->size/1024);
+ 				return "{$size_kb} KB";
+ 			} else {
+ 				$size_mb = round($this->size/1048576, 1);
+ 				return "{$size_mb} MB";
+ 			}
+ 		}
+
+ 		public function destroy(){
+ 			// remove db entry
+ 			if($this->delete()){
+	 			// remove file
+ 				$target_path = SITE_ROOT.DS.'public'.DS.$this->image_path();
+ 				return unlink($target_path) ? true : false;
+ 			} else {
+ 				// db delete failed
+ 				return false;
+ 			}
+
+ 		}
+ 
 	}
 ?>

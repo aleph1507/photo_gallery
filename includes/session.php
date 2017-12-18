@@ -4,10 +4,17 @@
 
 		private $logged_in = false;
 		public $user_id;
+		public $message;
 
 		function __construct(){
 			session_start();
+			$this->check_message();
 			$this->check_login();
+			if($this->logged_in) { 
+				//logged in actions
+			} else {
+				// not logged in actions
+			}
 		}
 
 		private function check_login() {
@@ -38,8 +45,30 @@
 			$this->logged_in = false;
 		}
 
+		private function check_message(){
+			// is there a message stored in the session?
+			if(isset($_SESSION['message'])){
+				// add it as an attribute and erase the stored message
+				$this->message = $_SESSION['message'];
+				unset($_SESSION['message']);
+			} else {
+				$this->message = "";
+			}
+		}
+
+		public function message($msg=""){
+			if(!empty($msg)){
+				// then this is "set message"
+				$_SESSION['message'] = $msg;
+			} else {
+				// then this is "get message"
+				return $this->message;
+			}
+		}
+
 	}
 
 	$session = new Session();
+	$message = $session->message();
 
 ?>
