@@ -13,6 +13,7 @@
 	
 		<?php echo output_message($message); ?>
 		<ul>
+			<li><a href="list_photos.php">List photos</a></li>
 			<li><a href="logfile.php">View Log File</a></li>
 			<li><a href="logout.php">Logout</a></li>
 		</ul>
