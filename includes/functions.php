@@ -40,4 +40,9 @@
 		// photo_gallery/public/admin/logfile.php reads the logfile, link to clear log file, "logfile.php?clear=true", logs log clearing
 	}
 
+	function datetime_to_text($datetime=""){
+		$unixdatetime = strtotime($datetime);
+		return strftime("%B %d, %Y at %I:%M %p", $unixdatetime);
+	}
+
 ?>

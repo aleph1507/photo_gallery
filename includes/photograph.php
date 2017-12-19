@@ -123,6 +123,10 @@
  			}
  		}
 
+		public function comments(){
+			return Comment::find_comments_on($this->id);
+		} 		
+
  		public function destroy(){
  			// remove db entry
  			if($this->delete()){
