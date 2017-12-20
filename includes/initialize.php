@@ -14,6 +14,8 @@
 
 	defined('LIB_PATH') ? null : define('LIB_PATH', SITE_ROOT.DS.'includes');
 
+	defined('PHPMAILER_PATH') ? null : define('PHPMAILER_PATH', SITE_ROOT.DS.'vendor'.DS.'phpmailer'.DS.'phpmailer'.DS.'src');
+
 	//load config file first
 	require_once(LIB_PATH.DS.'config.php');
 
@@ -24,11 +26,19 @@
 	require_once(LIB_PATH.DS.'session.php');
 	require_once(LIB_PATH.DS.'database.php');
 	require_once(LIB_PATH.DS.'database_object.php');
+	require_once(LIB_PATH.DS.'pagination.php');
+	require_once(PHPMAILER_PATH.DS.'Exception.php');
+	require_once(PHPMAILER_PATH.DS.'PHPMailer.php');
+	require_once(PHPMAILER_PATH.DS.'SMTP.php');
+
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
 
 
 	//load database-related classes
 	require_once(LIB_PATH.DS.'user.php');
 	require_once(LIB_PATH.DS.'photograph.php');
+	require_once(LIB_PATH.DS.'comment.php');
 
 	// Load logger
 	require_once(LIB_PATH.DS.'logger.php');

@@ -20,6 +20,8 @@
 			// comment saved
 			// redirect to prevent repost
 
+			$new_comment->try_to_send_notification();
+
 			redirect_to("photo.php?id={$photo->id}");
 		} else {
 			// failed

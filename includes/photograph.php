@@ -16,6 +16,16 @@
  		private $temp_path;
  		protected $upload_dir = 'images';
  		public $errors = array();
+
+ 		// public static function count_all(){
+ 		// 	global $database;
+
+ 		// 	$sql = "SELECT COUNT(*) FROM " . self::$table_name;
+
+ 		// 	$result_set = $database->query($sql);
+ 		// 	$row = $database->fetch_array($result_set);
+ 		// 	return array_shift($row);
+ 		// }
 	
  		protected $upload_errors = [
  			UPLOAD_ERR_OK => 'No errors.',
